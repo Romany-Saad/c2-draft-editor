@@ -52,15 +52,7 @@ const videoPlugin = createVideoPlugin({
 const linkPlugin = createLinkPlugin({
   placeholder: 'http://',
 })
-// const inlineToolbarPlugin = createInlineToolbarPlugin({
-//   structure: [
-//     BoldButton,
-//     ItalicButton,
-//     UnderlineButton,
-//     linkPlugin.LinkButton,
-//   ],
-// })
-// const {InlineToolbar} = inlineToolbarPlugin
+
 const toolbarPlugin = createToolbarPlugin({decorator})
 const imagePlugin = createImagePlugin({decorator, type: 'atomic'})
 const {Toolbar} = toolbarPlugin
@@ -85,14 +77,10 @@ export default class CustomToolbarEditor extends Component {
   componentDidMount() {
     const {value} = this.props
 
-    if (value) {
-      try {
-        this.setState({editorState: EditorState.createWithContent(convertFromRaw(value))})
-      } catch (e) {
-        console.log('invalid editor state')
-        this.setState({editorState: EditorState.createEmpty()})
-      }
-    } else {
+    try {
+      this.setState({editorState: EditorState.createWithContent(convertFromRaw(value))})
+    } catch (e) {
+      console.log('invalid editor state')
       this.setState({editorState: EditorState.createEmpty()})
     }
   }
