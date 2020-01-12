@@ -24,13 +24,6 @@ export default {
     },
   ],
   plugins: [
-    // scss({
-    //   output: function (styles, styleNodes) {
-    //     Object.keys(styleNodes).forEach(file => {
-    //       fs.writeFileSync(path.resolve('dist/styles', `${path.basename(file).replace(path.extname(file), '.css')}`), styleNodes[file])
-    //     })
-    //   },
-    // }),
     external(),
     postcss({
       extract: true,
