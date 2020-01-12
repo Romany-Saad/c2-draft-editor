@@ -74,7 +74,7 @@ const colorBlockPlugin = createColorBlockPlugin({decorator})
 const plugins = [
   videoPlugin, imagePlugin, resizeablePlugin,
   alignmentPlugin, focusPlugin, toolbarPlugin,
-  /*counterPlugin, */colorBlockPlugin, /*inlineToolbarPlugin,*/ linkPlugin,
+  /*counterPlugin, */colorBlockPlugin, linkPlugin,
 ]
 
 export default class CustomToolbarEditor extends Component {
@@ -84,23 +84,16 @@ export default class CustomToolbarEditor extends Component {
 
   componentDidMount() {
     const {value} = this.props
-    let jsonValue
-    try {
-      jsonValue = JSON.parse(value)
-    } catch (e) {
-      console.log('invalid editor state')
-    } finally {
-      if (jsonValue) {
-        this.setState({
-          editorState: EditorState.createWithContent(
-            convertFromRaw(jsonValue),
-          ),
-        })
-      } else {
-        this.setState({
-          editorState: EditorState.createEmpty(),
-        })
+
+    if (value) {
+      try {
+        this.setState({editorState: EditorState.createWithContent(convertFromRaw(value))})
+      } catch (e) {
+        console.log('invalid editor state')
+        this.setState({editorState: EditorState.createEmpty()})
       }
+    } else {
+      this.setState({editorState: EditorState.createEmpty()})
     }
   }
 
@@ -117,13 +110,13 @@ export default class CustomToolbarEditor extends Component {
     const {editorState} = this.state
     const rawContent = convertToRaw(editorState.getCurrentContent())
     if (typeof window !== 'undefined') {
-      onChange(name, JSON.stringify(rawContent))
+      onChange(name, rawContent)
     }
   }
 
   render() {
     const {editorState} = this.state
-    const {addCustom} = this.props
+
     if (editorState === null) return null
     return (
       <div>
