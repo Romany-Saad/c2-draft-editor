@@ -1,0 +1,8 @@
+{
+  "short_name": "c2-draft-editor",
+  "name": "c2-draft-editor",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
