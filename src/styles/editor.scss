@@ -1,0 +1,59 @@
+.editor.draft-js {
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  cursor: text;
+  padding: 16px;
+  border-radius: 2px;
+  margin-bottom: 2em;
+  box-shadow: inset 0px 1px 8px -3px #ABABAB;
+  background: #fefefe;
+
+  .DraftEditor-editorContainer {
+    min-height: 350px;
+    padding-bottom: 30px;
+  }
+
+  &.custom-editor-height {
+    .DraftEditor-editorContainer {
+      min-height: 100px;
+    }
+  }
+
+  .buttonWrapper {
+    display: inline-block;
+  }
+
+  .button {
+    background: #333;
+    color: #ddd;
+    font-size: 18px !important;
+    border: 0;
+    padding: 5px;
+    vertical-align: bottom;
+    width: 36px;
+    border-radius: 4px;
+  }
+
+  .button svg {
+    fill: #ddd;
+  }
+
+  .button:hover, .button:focus {
+    background: #444;
+    outline: 0; /* reset for :focus */
+  }
+
+  .active {
+    color: #6a9cc9;
+  }
+
+  .active svg {
+    fill: #6a9cc9;
+  }
+
+
+}
+
+.editor :global(.public-DraftEditor-content) {
+  min-height: 140px;
+}

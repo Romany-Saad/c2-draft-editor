@@ -1,0 +1,19 @@
+.draftJsToolbar__toolbar__dNtBH {
+  padding: 5px;
+  display: flex;
+  background: transparent;
+
+  .buttonWrapper {
+    padding: 0;
+    cursor: pointer;
+  }
+}
+
+.resp-container {
+  &.video {
+    position: relative;
+    width: 640px;
+    padding-top: 70%;
+    max-width: 100%;
+  }
+}

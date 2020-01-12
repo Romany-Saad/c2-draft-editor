@@ -1,10 +1,11 @@
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
-import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
+import postcss from 'rollup-plugin-postcss'
 import url from 'rollup-plugin-url'
 import svgr from '@svgr/rollup'
+import * as draftJs from 'draft-js'
 
 import pkg from './package.json'
 
@@ -14,26 +15,41 @@ export default {
     {
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true
+      sourcemap: true,
     },
     {
       file: pkg.module,
       format: 'es',
-      sourcemap: true
-    }
+      sourcemap: true,
+    },
   ],
   plugins: [
+    // scss({
+    //   output: function (styles, styleNodes) {
+    //     Object.keys(styleNodes).forEach(file => {
+    //       fs.writeFileSync(path.resolve('dist/styles', `${path.basename(file).replace(path.extname(file), '.css')}`), styleNodes[file])
+    //     })
+    //   },
+    // }),
     external(),
     postcss({
-      modules: true
+      extract: true,
     }),
     url(),
     svgr(),
     babel({
       exclude: 'node_modules/**',
-      plugins: [ 'external-helpers' ]
+      plugins: ['external-helpers'],
     }),
     resolve(),
-    commonjs()
-  ]
+    commonjs({
+      namedExports: {
+        'draft-js': Object.keys(draftJs),
+        'node_modules/punycode/punycode.js': ['punycode'],
+        'src/RichEditor/draft-js-compact/index.js': [
+          'compress', 'expand',
+        ],
+      },
+    }),
+  ],
 }
